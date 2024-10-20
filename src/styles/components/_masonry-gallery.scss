@@ -1,0 +1,24 @@
+@use '../variables' as *;
+
+.masonry-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .masonry-item {
+    flex-grow: 1;
+    cursor: pointer;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
