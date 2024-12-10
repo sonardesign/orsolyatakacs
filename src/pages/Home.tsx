@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import MasonryGallery from '../components/MasonryGallery';
-import LightboxGallery from '../components/LightboxGallery';
-import { images, ImageData } from '../imageData';
+import ImageGallery from "@/components/ImageDetail";
+import { useState } from "react";
+import LightboxGallery from "../components/LightboxGallery";
+import MasonryGallery from "../components/MasonryGallery";
+import { ImageData, images } from "../imageData";
 
 function Home() {
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
@@ -17,6 +18,7 @@ function Home() {
           onClose={() => setSelectedImage(null)}
         />
       )}
+      <ImageGallery />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import './styles/main.scss';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import BlogPage from "./components/PageTypes/BlogPage";
+import DynamicPage from "./pages/DynamicPages";
+import Home from "./pages/Home";
+import "./styles/main.scss";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/:slug" element={<DynamicPage />} />
+            <Route path="/blog/:slug" element={<BlogPage />} />
           </Routes>
         </main>
         <Footer />
