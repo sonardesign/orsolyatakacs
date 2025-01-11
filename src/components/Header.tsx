@@ -20,7 +20,7 @@ interface PageSummary {
   seoMetadata: SeoMetadata[];
 }
 
-const HomePage: React.FC = () => {
+const Header: React.FC = () => {
   const [pages, setPages] = useState<PageSummary[]>([]);
   const [homePage, setHomePage] = useState<PageSummary | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -55,23 +55,25 @@ const HomePage: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
   if (!homePage) return;
 
+  console.log("header", homePage, pages)
+
   return (
     <header>
       <nav>
         <ul>
-          <li key={homePage.id}>
+          <li key={homePage.documentId}>
             <Link
               state={{ id: homePage.documentId }}
-              to={homePage.seoMetadata[0].canonicalUrl}
+              to={homePage.seoMetadata?.[0].canonicalUrl}
             >
               {homePage.title}
             </Link>
           </li>
           {pages.map((page) => (
-            <li key={page.id}>
+            <li key={page.documentId}>
               <Link
                 state={{ id: page.documentId }}
-                to={page.seoMetadata[0].canonicalUrl}
+                to={page.seoMetadata?.[0].canonicalUrl}
               >
                 {page.title}
               </Link>
@@ -83,4 +85,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default Header;

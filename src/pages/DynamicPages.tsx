@@ -1,26 +1,8 @@
+import { PageData } from "@/components/PageTypes/HomePage";
 import RichText from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-
-interface ContentNode {
-  type: string;
-  text?: string;
-  children?: ContentNode[];
-}
-
-interface SeoMetadata {
-  title: string;
-  description: string;
-  keywords: string;
-  canonicalUrl: string;
-}
-
-interface PageData {
-  title: string;
-  content: string;
-  seoMetadata: SeoMetadata[];
-}
 
 const DynamicPage: React.FC = () => {
   const location = useLocation();

@@ -1,4 +1,3 @@
-import ImageGallery from "@/components/ImageDetail";
 import { useState } from "react";
 import LightboxGallery from "../components/LightboxGallery";
 import MasonryGallery from "../components/MasonryGallery";
@@ -18,7 +17,7 @@ function Home() {
           onClose={() => setSelectedImage(null)}
         />
       )}
-      <ImageGallery />
+      {/* <ImageGallery /> */}
     </div>
   );
 }

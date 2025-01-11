@@ -2,25 +2,13 @@ import RichText from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-
+import { PageData } from "./HomePage";
+/* 
 interface ContentNode {
   type: string;
   text?: string;
   children?: ContentNode[];
-}
-
-interface SeoMetadata {
-  title: string;
-  description: string;
-  keywords: string;
-  canonicalUrl: string;
-}
-
-interface PageData {
-  title: string;
-  content: string;
-  seoMetadata: SeoMetadata[];
-}
+} */
 
 const BlogPage: React.FC = () => {
   const location = useLocation();

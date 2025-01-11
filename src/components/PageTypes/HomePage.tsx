@@ -1,4 +1,4 @@
-import RichText from "@/components/RichText";
+import RichText, { Block } from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
@@ -17,11 +17,11 @@ interface Photos {
   name: string;
 }
 
-interface PageData {
+export interface PageData {
   title: string;
-  content: string;
+  content: Block[];
   seoMetadata: SeoMetadata[];
-  photos: Photos[];
+  photos?: Photos[];
 }
 
 const HomePage: React.FC = () => {
@@ -47,9 +47,8 @@ const HomePage: React.FC = () => {
         const response = await fetch(
           `${API_BASE_URL}/api/pages/${pageId}?populate=*`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch page data");
-        }
+
+        console.log(response)
 
         const result = await response.json();
 
@@ -89,7 +88,7 @@ const HomePage: React.FC = () => {
       {/* Page Content */}
       <h1>{title}</h1>
       <RichText content={content} />
-      {photos.map((photo) => {
+      {photos?.map((photo) => {
         return <ImageGallery key={photo.id} documentId={photo.documentId} />;
       })}
     </div>

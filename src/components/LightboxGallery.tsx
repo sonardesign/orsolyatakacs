@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ImageData } from '../imageData';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 

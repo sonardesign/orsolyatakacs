@@ -20,12 +20,9 @@ const HomePage: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetchPageData();
-        if (!response.ok) {
-          throw new Error("Failed to fetch pages");
-        }
 
-        const result = await response.json();
-        setPages(result.data);
+        console.log(response)
+        setPages(response);
       } catch (err: any) {
         setError(err.message || "An unknown error occurred");
       } finally {

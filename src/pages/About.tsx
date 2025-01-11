@@ -1,26 +1,8 @@
 import { fetchPageData } from "@/api/api";
-import { renderContent } from "@/components/Content";
+import { PageData } from "@/components/PageTypes/HomePage";
+import RichText from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-
-interface ContentNode {
-  type: string;
-  text?: string;
-  children?: ContentNode[];
-}
-
-interface SeoMetadata {
-  title: string;
-  description: string;
-  keywords: string;
-  canonicalUrl: string;
-}
-
-interface PageData {
-  title: string;
-  content: ContentNode[];
-  seoMetadata: SeoMetadata[];
-}
 
 const AboutPage: React.FC = () => {
   const [pageData, setPageData] = useState<PageData | null>(null);
@@ -60,7 +42,7 @@ const AboutPage: React.FC = () => {
 
       {/* Page Content */}
       <h1>{title}</h1>
-      <div>{renderContent(content)}</div>
+      <RichText content={content} />
     </div>
   );
 };

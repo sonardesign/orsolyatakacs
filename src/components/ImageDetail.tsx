@@ -16,9 +16,9 @@ const ImageGallery = ({ documentId }: { documentId: string }) => {
         const response = await fetch(
           `${BASE_API_URL}/api/photos/${documentId}?populate=*`
         ); // Replace with your endpoint
+        console.log(response);
         const data = await response.json();
 
-        console.log(data);
 
         // Adjust this structure to match your API response
         const media = {
