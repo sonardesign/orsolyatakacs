@@ -37,7 +37,6 @@ const Header: React.FC = () => {
         } = (await fetchPageData()) as PageTypes;
 
         const rest = [...blogs, ...generic];
-        console.log(rest, response);
 
         setHomePage(response);
         setPages(rest);
@@ -54,8 +53,6 @@ const Header: React.FC = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!homePage) return;
-
-  console.log("header", homePage, pages)
 
   return (
     <header>

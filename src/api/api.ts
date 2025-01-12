@@ -11,7 +11,6 @@ export const fetchPageData = async () => {
       throw new Error(`Failed to fetch page data: ${response.statusText}`);
     }
     const data = await response.json();
-    console.log("api", data.data[0]);
     return data.data[0]; // Assuming 'slug' is unique
   } catch (error) {
     console.error("Error fetching page data:", error);

@@ -2,9 +2,10 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import BlogPage from "./components/PageTypes/BlogPage";
-import DynamicPage from "./pages/DynamicPages";
 import "./styles/main.scss";
 import HomePage from "./components/PageTypes/HomePage";
+import Home from "./pages/Home";
+import GeneralPage from "./components/PageTypes/GeneralPage";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/:slug" element={<DynamicPage />} />
-            <Route path="/blog/:slug" element={<BlogPage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/generic" element={<GeneralPage />} />
+            <Route path="/blog/first" element={<BlogPage />} />
           </Routes>
         </main>
         <Footer />

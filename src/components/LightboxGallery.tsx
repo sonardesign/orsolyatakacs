@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { ImageData } from '../imageData';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { PhotoData } from './PageTypes/HomePage';
 
 interface LightboxGalleryProps {
-  images: ImageData[];
-  selectedImage: ImageData;
+  images: PhotoData[];
+  selectedImage: PhotoData;
   onClose: () => void;
 }
 
@@ -26,10 +26,12 @@ function LightboxGallery({ images, selectedImage, onClose }: LightboxGalleryProp
 
   const currentImage = images[currentIndex];
 
+  console.log(currentImage)
+
   return (
     <div className="lightbox-gallery">
       <div className="lightbox-content">
-        <img src={currentImage.src} alt={currentImage.alt} />
+        <img src={currentImage.img.url} alt={currentImage.img.alternativeText} />
         <button className="close-button" onClick={onClose} aria-label="Close lightbox">
           <X size={24} />
         </button>
@@ -39,6 +41,14 @@ function LightboxGallery({ images, selectedImage, onClose }: LightboxGalleryProp
         <button className="nav-button next" onClick={handleNext} aria-label="Next image">
           <ChevronRight size={24} />
         </button>
+        <div className="image-description">
+          <h3>
+          {currentImage.name}
+          </h3>
+          <p>
+          {currentImage.description}
+          </p>
+        </div>
         <div className="image-counter">
           {currentIndex + 1} / {images.length}
         </div>
