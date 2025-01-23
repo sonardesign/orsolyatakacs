@@ -1,4 +1,4 @@
-import { PhotoData } from "./PageTypes/HomePage";
+import { PhotoData } from "./PageTypes/Home";
 
 interface MasonryGalleryProps {
   images: PhotoData[];
@@ -6,14 +6,16 @@ interface MasonryGalleryProps {
 }
 
 function MasonryGallery({ images, onImageClick }: MasonryGalleryProps) {
-
   return (
     <div className="masonry-gallery">
       {images.map((image) => (
         <div
           key={image.img.id}
           className="masonry-item"
-          style={{ width: `${image.img.width}px`, height: `${image.img.height}px` }}
+          style={{
+            width: `${image.img.width}px`,
+            height: `${image.img.height}px`,
+          }}
           onClick={() => onImageClick(image)}
         >
           <img

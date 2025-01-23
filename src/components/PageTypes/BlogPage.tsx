@@ -2,7 +2,7 @@ import RichText from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import { PageData } from "./HomePage";
+import { PageData } from "./Home";
 /* 
 interface ContentNode {
   type: string;

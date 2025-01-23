@@ -41,7 +41,7 @@ export interface HomePageData {
   photos?: Photos[];
 }
 
-const HomePage: React.FC = () => {
+const Contact: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<PhotoData | null>(null);
   const [fetchedImages, setFetchedImages] = useState<PhotoData[]>([]);
   const [data, setData] = useState<HomePageData | null>(null);
@@ -55,17 +55,19 @@ const HomePage: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/pages?filters[page_][$containsi]=about_uid?populate=*`
+          `${API_BASE_URL}/api/pages?filters[page_][$containsi]=contact_uid&populate=*`
         );
 
         const result = await response.json();
 
-        if (result.data) {
-          if (result.data.photos) {
-            fetchImages(result.data.photos);
+        const tempData = result.data[0] as HomePageData;
+
+        if (tempData) {
+          if (tempData.photos) {
+            fetchImages(tempData.photos);
           }
 
-          setData(result.data);
+          setData(tempData);
         } else {
           setError("Page not found");
         }
@@ -125,4 +127,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default Contact;

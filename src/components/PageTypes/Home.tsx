@@ -55,20 +55,19 @@ const HomePage: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/home?populate=*`
+          `${API_BASE_URL}/api/pages?filters[page_][$containsi]=home_uid&populate=*`
         );
 
-
-        
         const result = await response.json();
 
-        if (result.data) {
+        const tempData = result.data[0] as HomePageData;
 
-          if (result.data.photos) {
-            fetchImages(result.data.photos)
+        if (tempData) {
+          if (tempData.photos) {
+            fetchImages(tempData.photos);
           }
 
-          setData(result.data);
+          setData(tempData);
         } else {
           setError("Page not found");
         }
@@ -85,11 +84,13 @@ const HomePage: React.FC = () => {
   const fetchImages = async (images: Photos[]) => {
     const fetchedImages = await Promise.all(
       images.map((image) =>
-        fetch(`${API_BASE_URL}/api/photos/${image.documentId}?populate=*`).then((res) => res.json())
+        fetch(`${API_BASE_URL}/api/photos/${image.documentId}?populate=*`).then(
+          (res) => res.json()
+        )
       )
     );
     setFetchedImages(fetchedImages.map((item) => item.data));
-  }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -98,7 +99,7 @@ const HomePage: React.FC = () => {
   const canonicalUrl = `${BASE_URL}${seoMetadata?.canonicalUrl}`;
 
   return (
-    <div  className="home">
+    <div className="home">
       {/* SEO Metadata */}
       <Helmet>
         <title>{seoMetadata?.title}</title>
@@ -109,7 +110,12 @@ const HomePage: React.FC = () => {
 
       {/* Page Content */}
       <RichText content={content} />
-      {photos && <MasonryGallery images={fetchedImages} onImageClick={setSelectedImage} />}
+      {photos && (
+        <MasonryGallery
+          images={fetchedImages}
+          onImageClick={setSelectedImage}
+        />
+      )}
       {selectedImage && photos && (
         <LightboxGallery
           images={fetchedImages}

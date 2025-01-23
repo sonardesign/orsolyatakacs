@@ -6,18 +6,12 @@ interface SeoMetadata {
   canonicalUrl: string;
 }
 
-interface PageTypes {
-  blog_post_pages: PageSummary[];
-  generic_pages: PageSummary[];
-  home_page: PageSummary;
-}
-
 interface PageSummary {
   id: number;
   documentId: string;
   uid: string;
   title: string;
-  seoMetadata: SeoMetadata[];
+  seoMetadata: SeoMetadata;
 }
 
 const Header: React.FC = () => {
@@ -30,16 +24,18 @@ const Header: React.FC = () => {
     const fetchPages = async () => {
       setLoading(true);
       try {
-        const {
-          home_page: response,
-          blog_post_pages: blogs,
-          generic_pages: generic,
-        } = (await fetchPageData()) as PageTypes;
+        const response = await fetchPageData();
 
-        const rest = [...blogs, ...generic];
+        const homePage = response.find(
+          (page: PageSummary) => page.title === "Home"
+        );
 
-        setHomePage(response);
-        setPages(rest);
+        const finalPages = response.filter(
+          (page: PageSummary) => page.title !== "Home"
+        );
+
+        setPages(finalPages);
+        setHomePage(homePage);
       } catch (err: any) {
         setError(err.message || "An unknown error occurred");
       } finally {
@@ -54,6 +50,8 @@ const Header: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
   if (!homePage) return;
 
+  console.log(homePage);
+
   return (
     <header>
       <nav>
@@ -61,7 +59,7 @@ const Header: React.FC = () => {
           <li key={homePage.documentId}>
             <Link
               state={{ id: homePage.documentId }}
-              to={homePage.seoMetadata?.[0].canonicalUrl}
+              to={homePage.seoMetadata?.canonicalUrl}
             >
               {homePage.title}
             </Link>
@@ -70,7 +68,7 @@ const Header: React.FC = () => {
             <li key={page.documentId}>
               <Link
                 state={{ id: page.documentId }}
-                to={page.seoMetadata?.[0].canonicalUrl}
+                to={page.seoMetadata?.canonicalUrl}
               >
                 {page.title}
               </Link>

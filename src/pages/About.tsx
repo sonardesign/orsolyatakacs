@@ -1,5 +1,5 @@
 import { fetchPageData } from "@/api/api";
-import { PageData } from "@/components/PageTypes/HomePage";
+import { PageData } from "@/components/PageTypes/Home";
 import RichText from "@/components/RichText";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
